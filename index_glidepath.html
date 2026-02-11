@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glidepath to Green Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,500;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--bg:#0B0F19;--sf:#141926;--sfr:#1A2033;--bd:rgba(255,255,255,.06);--tx:#E8ECF4;--td:#7A8499;--tm:#4A5568;--gn:#34D399;--gnd:rgba(52,211,153,.12);--am:#FBBF24;--amd:rgba(251,191,36,.12);--rd:#F87171;--rdd:rgba(248,113,113,.12);--bl:#60A5FA;--bld:rgba(96,165,250,.12);--pr:#A78BFA;--or:#FF9900;--ord:rgba(255,153,0,.12);--fb:'DM Sans',sans-serif;--fm:'Space Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font-family:var(--fb);min-height:100vh}
+body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(52,211,153,.06)0%,transparent 70%);pointer-events:none}
+.d{max-width:1440px;margin:0 auto;padding:32px 40px 60px;position:relative;z-index:1}
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--bd)}
+.hdr h1{font-size:32px;font-weight:700;letter-spacing:-.5px}.hdr .g{color:var(--gn)}
+.hdr .tg{font-size:14px;color:var(--td);margin-top:6px;font-weight:300}
+.hdr-r{display:flex;gap:16px}
+.badge{font-family:var(--fm);font-size:11px;padding:6px 14px;border-radius:6px;letter-spacing:.5px}
+.bp{background:var(--sfr);color:var(--td);border:1px solid var(--bd)}
+.bs{background:var(--gnd);color:var(--gn);border:1px solid rgba(52,211,153,.2)}
+.hg{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:32px}
+.hc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.hc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.hc.gn::before{background:var(--gn)}.hc.am::before{background:var(--am)}.hc.bl::before{background:var(--bl)}.hc.or::before{background:var(--or)}.hc.rd::before{background:var(--rd)}
+.hl{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:1.2px;font-weight:500;margin-bottom:10px}
+.hv{font-family:var(--fm);font-size:36px;font-weight:700;line-height:1}
+.hv.gn{color:var(--gn)}.hv.am{color:var(--am)}.hv.bl{color:var(--bl)}.hv.or{color:var(--or)}.hv.rd{color:var(--rd)}
+.hs{font-size:12px;color:var(--td);margin-top:6px}.hs .p{color:var(--gn);font-weight:700}.hs .n{color:var(--rd);font-weight:700}
+.st{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--tm);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.st::after{content:'';flex:1;height:1px;background:var(--bd)}
+.cr{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:32px}
+.cd{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:24px}
+.ct{font-size:15px;font-weight:700;margin-bottom:4px}.cs{font-size:12px;color:var(--td);margin-bottom:20px}
+.cw{position:relative;height:340px}
+.cos{display:flex;flex-direction:column;gap:12px}
+.co{background:var(--sfr);border-radius:10px;padding:16px;border-left:3px solid}
+.co.w{border-color:var(--gn)}.co.r{border-color:var(--am)}.co.a{border-color:var(--rd)}.co.i{border-color:var(--bl)}
+.cot{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;font-weight:700}
+.co.w .cot{color:var(--gn)}.co.r .cot{color:var(--am)}.co.a .cot{color:var(--rd)}.co.i .cot{color:var(--bl)}
+.cox{font-size:13px;line-height:1.5}.com{font-family:var(--fm);font-size:12px;color:var(--td);margin-top:6px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
+.fcw{height:260px;position:relative}
+.wt{width:100%;border-collapse:collapse;font-size:12px}
+.wt th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--tm);padding:8px 10px;border-bottom:1px solid var(--bd);font-weight:700}
+.wt td{padding:10px;border-bottom:1px solid var(--bd);font-family:var(--fm);font-size:12px}
+.wt tr:last-child td{border-bottom:none}
+.wg{color:var(--gn)}.wb{color:var(--rd)}
+.sct{width:100%;border-collapse:collapse;font-size:13px}
+.sct th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--tm);padding:10px 12px;border-bottom:1px solid var(--bd);font-weight:700}
+.sct td{padding:12px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.sct tr:last-child td{border-bottom:none}
+.kn{font-weight:600}.mn{font-family:var(--fm);font-size:13px}
+.pl{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.pl.h{background:var(--gnd);color:var(--gn)}.pl.m{background:var(--rdd);color:var(--rd)}.pl.im{background:var(--amd);color:var(--am)}
+.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.ic{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:22px;position:relative;overflow:hidden}
+.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ic.gn::before{background:linear-gradient(90deg,var(--gn),transparent)}
+.ic.am::before{background:linear-gradient(90deg,var(--am),transparent)}
+.ic.rd::before{background:linear-gradient(90deg,var(--rd),transparent)}
+.ic.bl::before{background:linear-gradient(90deg,var(--bl),transparent)}
+.it{font-size:14px;font-weight:700;margin-bottom:8px}.ib{font-size:13px;color:var(--td);line-height:1.55}
+.fg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.fc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:22px;transition:border-color .3s}
+.fc:hover{border-color:rgba(255,153,0,.3)}
+.fn{font-family:var(--fm);font-size:11px;color:var(--or);margin-bottom:10px;letter-spacing:1px}
+.ft{font-size:14px;font-weight:700;margin-bottom:8px}
+.fbd{font-size:12px;color:var(--td);line-height:1.55;margin-bottom:10px}
+.ftr{font-family:var(--fm);font-size:11px;background:var(--gnd);color:var(--gn);padding:4px 10px;border-radius:4px;display:inline-block}
+.ar{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
+.acw{height:260px;position:relative}
+.ftr2{text-align:center;font-size:11px;color:var(--tm);padding-top:24px;border-top:1px solid var(--bd)}
+@media(max-width:1100px){.hg{grid-template-columns:repeat(3,1fr)}.cr,.fr,.ar{grid-template-columns:1fr}.ig{grid-template-columns:1fr}.fg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.d{padding:16px}.hg{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="d">
+
+<div class="hdr">
+<div>
+<h1>Glidepath to <span class="g">Green</span></h1>
+<div class="tg">Kooner Fleet Management — Amazon Last Mile TTR Performance Dashboard</div>
+</div>
+<div class="hdr-r">
+<span class="badge bp">WK46 → WK6</span>
+<span class="badge bs">● WK6: 1/9 HIT · IMPROVING</span>
+</div>
+</div>
+
+<div class="hg">
+<div class="hc am"><div class="hl">Current Median TTR</div><div class="hv am">1.23d</div><div class="hs">WK6 · <span class="p">↓0.32d WoW</span></div></div>
+<div class="hc gn"><div class="hl">Best Performance</div><div class="hv gn">0.96d</div><div class="hs">WK4 — first sub-1.0 overall ✓</div></div>
+<div class="hc bl"><div class="hl">Gap to Goal</div><div class="hv bl">0.23d</div><div class="hs">Target &lt;1.0d · closing fast</div></div>
+<div class="hc or"><div class="hl">Adoption (WK6)</div><div class="hv or">46%</div><div class="hs"><span class="p">↑4pts WoW</span> · Target 85%</div></div>
+<div class="hc gn"><div class="hl">Overall Improvement</div><div class="hv gn">61%</div><div class="hs">3.15d (WK46) → 1.23d (WK6)</div></div>
+</div>
+
+<div class="st">Forecast vs. Actual — Weekly Median TTR</div>
+<div class="cr">
+<div class="cd">
+<div class="ct">Overall Median TTR Glidepath</div>
+<div class="cs">Full trajectory WK46→WK6 · Actual vs Expected Glidepath vs Goal</div>
+<div class="cw"><canvas id="gpC"></canvas></div>
+</div>
+<div class="cd">
+<div class="ct">Key Callouts</div>
+<div class="cs">Critical events across the glidepath</div>
+<div class="cos">
+<div class="co w"><div class="cot">Milestone — WK4</div><div class="cox">First sub-1.0 day overall (0.96d). CargoVan hit 0.72d — best-ever. 5 of 9 KPIs hit.</div><div class="com">Proved the goal is achievable</div></div>
+<div class="co a"><div class="cot">Regression — WK5</div><div class="cox">Rebounded to 1.55d from 0.96d. All fleet metrics regressed. Backlog climbed to 4.44d.</div><div class="com">Sustainability gap: can't hold gains WoW</div></div>
+<div class="co w"><div class="cot">Recovery — WK6</div><div class="cox">Back to 1.23d (↓0.32). CargoVan recovered to 0.86d ✓. Adoption hit new high of 46%.</div><div class="com">Backlog improved to 3.92d (↓0.52)</div></div>
+<div class="co a"><div class="cot">Alert — Weekend Deficit WK6</div><div class="cox">Cratered to 23.1% (↓77pts WoW). Was consistent at 91–183%. Needs immediate investigation.</div><div class="com">Previously reliable KPI hit now at risk</div></div>
+</div>
+</div>
+</div>
+
+<div class="st">Fleet Performance Split</div>
+<div class="fr">
+<div class="cd">
+<div class="ct">BoxTruck Fleet — Median TTR</div>
+<div class="cs">Best: 0.78d (WK3) · WK6: 1.23d · Hit goal twice but can't sustain</div>
+<div class="fcw"><canvas id="btC"></canvas></div>
+</div>
+<div class="cd">
+<div class="ct">CargoVan Fleet — Median TTR</div>
+<div class="cs">Best: 0.72d (WK4) · WK6: 0.86d ✓ · Sub-1.0 in 2 of last 3 weeks</div>
+<div class="fcw"><canvas id="cvC"></canvas></div>
+</div>
+</div>
+
+<div class="st">Week-over-Week Performance Detail</div>
+<div class="cd" style="margin-bottom:32px;overflow-x:auto">
+<table class="wt">
+<thead><tr><th>Metric</th><th>Target</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>WK6</th><th>WoW Δ</th></tr></thead>
+<tbody>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Median TTR Overall</td><td>&lt;1.0d</td><td>1.33</td><td>1.56</td><td style="color:var(--gn)">1.08</td><td style="color:var(--gn);font-weight:700">0.96 ✓</td><td style="color:var(--rd)">1.55</td><td>1.23</td><td class="wg">↓ 0.32</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Median TTR Cargo</td><td>&lt;1.0d</td><td>2.36</td><td>1.59</td><td style="color:var(--rd)">2.93</td><td style="color:var(--gn);font-weight:700">0.72 ✓</td><td>1.39</td><td style="color:var(--gn)">0.86 ✓</td><td class="wg">↓ 0.53</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Median TTR BoxTruck</td><td>&lt;1.0d</td><td>1.03</td><td>1.56</td><td style="color:var(--gn);font-weight:700">0.78 ✓</td><td>1.20</td><td style="color:var(--rd)">1.65</td><td>1.23</td><td class="wg">↓ 0.42</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Avg TTR Overall</td><td>&lt;2.0d</td><td>2.46</td><td>2.74</td><td style="color:var(--gn);font-weight:700">1.87 ✓</td><td>2.16</td><td>2.39</td><td>2.58</td><td class="wb">↑ 0.18</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Avg TTR Cargo</td><td>&lt;2.0d</td><td>2.16</td><td>2.05</td><td style="color:var(--rd)">2.85</td><td style="color:var(--gn);font-weight:700">1.30 ✓</td><td>2.68</td><td>2.33</td><td class="wg">↓ 0.35</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Avg TTR BoxTruck</td><td>&lt;2.0d</td><td>2.59</td><td>3.16</td><td style="color:var(--gn);font-weight:700">1.51 ✓</td><td>2.60</td><td>2.12</td><td>2.76</td><td class="wb">↑ 0.64</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Backlog Burndown</td><td>&lt;1.0d</td><td>5.01</td><td>3.28</td><td>3.62</td><td>4.21</td><td>4.44</td><td>3.92</td><td class="wg">↓ 0.52</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Weekend Deficit</td><td>&gt;85%</td><td style="color:var(--gn)">100%</td><td style="color:var(--gn)">183%</td><td style="color:var(--gn)">91.7%</td><td style="color:var(--gn)">95%</td><td style="color:var(--gn)">100%</td><td style="color:var(--rd);font-weight:700">23.1%</td><td class="wb">↓ 77pts</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Vendor Rejection</td><td>&lt;5%</td><td>3.0%</td><td style="color:var(--gn)">0.0%</td><td>3.8%</td><td style="color:var(--gn)">0.0%</td><td>1.2%</td><td>1.9%</td><td class="wb">↑ 0.7pts</td></tr>
+<tr><td style="color:var(--tx);font-weight:600;font-family:var(--fb)">Adoption %</td><td>85%</td><td>34%</td><td>39%</td><td>34%</td><td>38%</td><td>42%</td><td>46%</td><td class="wg">↑ 4pts</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="st">KPI Scorecard — WK6</div>
+<div class="cd" style="margin-bottom:32px">
+<table class="sct">
+<thead><tr><th>KPI</th><th>Target</th><th>WK6</th><th>Best Week</th><th>6-Week Trend</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td class="kn">Median TAT Overall</td><td class="mn">&lt;1.0d</td><td class="mn">1.23d</td><td class="mn" style="color:var(--gn)">0.96d (WK4) ✓</td><td class="mn" style="color:var(--gn)">1.33→1.23 ↓</td><td><span class="pl im">Closing</span></td></tr>
+<tr><td class="kn">Median TAT Cargo</td><td class="mn">&lt;1.0d</td><td class="mn" style="color:var(--gn)">0.86d ✓</td><td class="mn" style="color:var(--gn)">0.72d (WK4) ✓</td><td class="mn" style="color:var(--gn)">2.36→0.86 ↓↓</td><td><span class="pl h">Hit ✓</span></td></tr>
+<tr><td class="kn">Median TAT BoxTruck</td><td class="mn">&lt;1.0d</td><td class="mn">1.23d</td><td class="mn" style="color:var(--gn)">0.78d (WK3) ✓</td><td class="mn" style="color:var(--am)">1.03→1.23 ↑</td><td><span class="pl im">Focus</span></td></tr>
+<tr><td class="kn">Avg TAT Overall</td><td class="mn">&lt;2.0d</td><td class="mn">2.58d</td><td class="mn" style="color:var(--gn)">1.87d (WK3) ✓</td><td class="mn" style="color:var(--am)">2.46→2.58 →</td><td><span class="pl m">Miss</span></td></tr>
+<tr><td class="kn">Avg TAT Cargo</td><td class="mn">&lt;2.0d</td><td class="mn">2.33d</td><td class="mn" style="color:var(--gn)">1.30d (WK4) ✓</td><td class="mn" style="color:var(--am)">2.16→2.33 →</td><td><span class="pl m">Miss</span></td></tr>
+<tr><td class="kn">Avg TAT BoxTruck</td><td class="mn">&lt;2.0d</td><td class="mn">2.76d</td><td class="mn" style="color:var(--gn)">1.51d (WK3) ✓</td><td class="mn" style="color:var(--am)">2.59→2.76 ↑</td><td><span class="pl m">Miss</span></td></tr>
+<tr><td class="kn">Backlog Burndown</td><td class="mn">&lt;1.0d</td><td class="mn">3.92d</td><td class="mn">3.28d (WK2)</td><td class="mn" style="color:var(--gn)">5.01→3.92 ↓</td><td><span class="pl m">Miss</span></td></tr>
+<tr><td class="kn">Weekend Deficit</td><td class="mn">&gt;85%</td><td class="mn" style="color:var(--rd)">23.1%</td><td class="mn" style="color:var(--gn)">183% (WK2)</td><td class="mn" style="color:var(--rd)">100→23.1 ↓↓</td><td><span class="pl m">Miss ⚠</span></td></tr>
+<tr><td class="kn">Vendor Rejection</td><td class="mn">&lt;5%</td><td class="mn">1.90%</td><td class="mn" style="color:var(--gn)">0.0% (WK2,4)</td><td class="mn" style="color:var(--gn)">Stable ✓</td><td><span class="pl h">Hit ✓</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="st">Performance Insights</div>
+<div class="ig">
+<div class="ic gn"><div class="it">WK4 Proved Goal Is Achievable</div><div class="ib">Overall median hit 0.96d — first sub-1.0 day week. CargoVan at 0.72d, 5/9 KPIs hit. Not a fluke — the culmination of process improvements. Question is sustainability.</div></div>
+<div class="ic am"><div class="it">Sawtooth Pattern: Strong→Regress→Recover</div><div class="ib">WK3 (1.08) → WK4 (0.96) → WK5 (1.55) → WK6 (1.23). Good weeks may benefit from clearing prior-week backlog rather than steady-state. Need to break this cycle for consistent sub-1.0.</div></div>
+<div class="ic rd"><div class="it">Weekend Deficit Collapse — WK6</div><div class="ib">Dropped from 100% to 23.1% (↓77pts). Had been a consistent strength (91–183% WK1-5). Investigate immediately: staffing gap? volume spike? reporting anomaly? Threatens a reliable KPI hit.</div></div>
+<div class="ic gn"><div class="it">CargoVan: From Worst to Best</div><div class="ib">Hit goal in 2 of last 3 weeks (0.72d WK4, 0.86d WK6). This fleet went from 7.27d (WK48) to sub-1.0 consistently. The stabilization strategy is delivering. Now the strongest fleet.</div></div>
+<div class="ic am"><div class="it">BoxTruck Lost Its Edge</div><div class="ib">Was the first fleet to hit goal (1.03d WK1, 0.78d WK3) but hasn't been sub-1.0 since WK3. Average TTR climbed to 2.76d — outlier repairs are dragging this fleet. Need escalation protocol.</div></div>
+<div class="ic bl"><div class="it">Adoption Steady at +4pts/Week</div><div class="ib">34→38→42→46% over WK3–WK6. Consistent growth. At this rate, 60% by ~WK10. Still far from 85% target, but trajectory is encouraging. Volume surge in WK6 (148 WOs created) shows scaling.</div></div>
+</div>
+
+<div class="st">Adoption & Volume</div>
+<div class="ar">
+<div class="cd">
+<div class="ct">Adoption Trend</div>
+<div class="cs">Kooner adoption % by week · WK1→WK6</div>
+<div class="acw"><canvas id="adC"></canvas></div>
+</div>
+<div class="cd">
+<div class="ct">Work Order Volume</div>
+<div class="cs">Total created (Cargo + BoxTruck) per week</div>
+<div class="acw"><canvas id="volC"></canvas></div>
+</div>
+</div>
+
+<div class="st">Priority Focus Areas</div>
+<div class="fg">
+<div class="fc"><div class="fn">01</div><div class="ft">Weekend Deficit Investigation</div><div class="fbd">23.1% in WK6 is a 77pt drop. Was a reliable KPI hit. Root cause immediately: staffing gap, volume spike, or reporting anomaly?</div><span class="ftr">Target: &gt;85% by WK8</span></div>
+<div class="fc"><div class="fn">02</div><div class="ft">BoxTruck Consistency</div><div class="fbd">Hit 0.78d (WK3) but can't sustain. Avg TTR at 2.76d means outlier repairs are the problem. Escalation protocol for WOs &gt;3d.</div><span class="ftr">Target: &lt;1.0d sustained</span></div>
+<div class="fc"><div class="fn">03</div><div class="ft">Sustain CargoVan Wins</div><div class="fbd">Sub-1.0 in 2 of last 3 weeks is the breakthrough story. Document what changed. Don't let WK3's 2.93d repeat.</div><span class="ftr">Target: &lt;1.0d 3 consecutive</span></div>
+<div class="fc"><div class="fn">04</div><div class="ft">Backlog Blitz Continues</div><div class="fbd">3.92d improving (was 5.01 WK1) but still 3x target. WK6 volume surged (148 created). Must match completion to inflow.</div><span class="ftr">Target: &lt;3.0d by WK8</span></div>
+</div>
+
+<div class="ftr2">Kooner Fleet Management Solutions — Amazon Last Mile Program — Data: LM Performance Scorecards WK46–WK06 — Updated Feb 2026</div>
+</div>
+
+<script>
+Chart.defaults.color='#7A8499';Chart.defaults.borderColor='rgba(255,255,255,.04)';Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=11;
+
+const W=['WK46','WK47','WK48','WK49','WK50','WK51','WK52','WK1','WK2','WK3','WK4','WK5','WK6'];
+const A=[3.15,2.22,4.28,1.64,1.74,2.45,1.69,1.33,1.56,1.08,0.96,1.55,1.23];
+const E=[null,null,null,null,null,3.20,2.50,2.20,1.90,1.60,1.30,1.10,0.80];
+
+new Chart(document.getElementById('gpC'),{
+type:'line',data:{labels:W,datasets:[
+{label:'Actual Median TTR',data:A,borderColor:'#34D399',backgroundColor:'rgba(52,211,153,.06)',borderWidth:2.5,pointRadius:5,pointBackgroundColor:A.map(v=>v<1?'#34D399':'#34D399'),pointBorderColor:'#0B0F19',pointBorderWidth:2,fill:true,tension:.3},
+{label:'Expected Glidepath',data:E,borderColor:'#60A5FA',borderWidth:2,borderDash:[6,4],pointRadius:3,pointBackgroundColor:'#60A5FA',pointBorderColor:'#0B0F19',pointBorderWidth:2,fill:false,tension:.3},
+{label:'Goal (<1.0d)',data:Array(13).fill(1.0),borderColor:'rgba(248,113,113,.5)',borderWidth:1.5,borderDash:[10,5],pointRadius:0,fill:false}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{padding:16,usePointStyle:true,pointStyleWidth:12,font:{size:11}}},tooltip:{backgroundColor:'#1A2033',borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:12,callbacks:{label:c=>c.raw!==null?c.dataset.label+': '+c.raw.toFixed(2)+'d':null}}},scales:{y:{min:0,max:5,ticks:{callback:v=>v.toFixed(1)+'d',stepSize:1},grid:{color:'rgba(255,255,255,.03)'}},x:{grid:{color:'rgba(255,255,255,.03)'},ticks:{font:{family:"'Space Mono',monospace",size:10}}}}}
+});
+
+const BT=[1.96,1.78,4.07,1.55,2.03,3.21,1.61,1.03,1.56,0.78,1.20,1.65,1.23];
+new Chart(document.getElementById('btC'),{
+type:'line',data:{labels:W,datasets:[
+{label:'BoxTruck Median',data:BT,borderColor:'#60A5FA',backgroundColor:'rgba(96,165,250,.06)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:BT.map(v=>v<1?'#34D399':'#60A5FA'),pointBorderColor:'#0B0F19',pointBorderWidth:2,fill:true,tension:.3},
+{label:'Goal',data:Array(13).fill(1.0),borderColor:'rgba(248,113,113,.4)',borderWidth:1.5,borderDash:[8,4],pointRadius:0,fill:false}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{padding:12,usePointStyle:true,font:{size:10}}},tooltip:{backgroundColor:'#1A2033',borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:10}},scales:{y:{min:0,max:5,ticks:{callback:v=>v.toFixed(1)+'d'},grid:{color:'rgba(255,255,255,.03)'}},x:{grid:{color:'rgba(255,255,255,.03)'},ticks:{font:{family:"'Space Mono'",size:9}}}}}
+});
+
+const CV=[4.09,2.81,7.27,1.61,1.42,1.88,1.73,2.36,1.59,2.93,0.72,1.39,0.86];
+new Chart(document.getElementById('cvC'),{
+type:'line',data:{labels:W,datasets:[
+{label:'CargoVan Median',data:CV,borderColor:'#A78BFA',backgroundColor:'rgba(167,139,250,.06)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:CV.map(v=>v<1?'#34D399':'#A78BFA'),pointBorderColor:'#0B0F19',pointBorderWidth:2,fill:true,tension:.3},
+{label:'Goal',data:Array(13).fill(1.0),borderColor:'rgba(248,113,113,.4)',borderWidth:1.5,borderDash:[8,4],pointRadius:0,fill:false}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{padding:12,usePointStyle:true,font:{size:10}}},tooltip:{backgroundColor:'#1A2033',borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:10}},scales:{y:{min:0,max:8,ticks:{callback:v=>v.toFixed(1)+'d'},grid:{color:'rgba(255,255,255,.03)'}},x:{grid:{color:'rgba(255,255,255,.03)'},ticks:{font:{family:"'Space Mono'",size:9}}}}}
+});
+
+new Chart(document.getElementById('adC'),{
+type:'bar',data:{labels:['WK1','WK2','WK3','WK4','WK5','WK6'],datasets:[{label:'Adoption %',data:[34,39,34,38,42,46],backgroundColor:['#FF9900','#FBBF24','#FF9900','#FBBF24','#FBBF24','#34D399'],borderRadius:6}]},
+options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#1A2033',borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:10,callbacks:{label:c=>'Adoption: '+c.raw+'%'}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%',stepSize:20},grid:{color:'rgba(255,255,255,.03)'}},x:{grid:{display:false},ticks:{font:{family:"'Space Mono'",size:10}}}}},
+plugins:[{afterDatasetsDraw:function(chart){var ctx=chart.ctx;var meta=chart.getDatasetMeta(0);meta.data.forEach(function(bar,i){var d=chart.data.datasets[0].data[i];ctx.fillStyle='#E8ECF4';ctx.font='bold 12px Space Mono';ctx.textAlign='center';ctx.fillText(d+'%',bar.x,bar.y-8)});var yA=chart.scales.y;var tY=yA.getPixelForValue(85);ctx.save();ctx.beginPath();ctx.setLineDash([8,4]);ctx.strokeStyle='#F87171';ctx.lineWidth=1.5;ctx.moveTo(chart.chartArea.left,tY);ctx.lineTo(chart.chartArea.right,tY);ctx.stroke();ctx.restore();ctx.fillStyle='#F87171';ctx.font='bold 10px Space Mono';ctx.textAlign='right';ctx.fillText('Target: 85%',chart.chartArea.right,tY-6)}}]
+});
+
+var cr=[12+23,15+36,14+33,27+38,19+57,55+93];
+var cp=[16+27,23+29,14+21,24+39,32+32,24+38];
+new Chart(document.getElementById('volC'),{
+type:'bar',data:{labels:['WK1','WK2','WK3','WK4','WK5','WK6'],datasets:[
+{label:'Created',data:cr,backgroundColor:'rgba(96,165,250,.7)',borderRadius:4},
+{label:'Completed',data:cp,backgroundColor:'rgba(52,211,153,.7)',borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{padding:12,usePointStyle:true,font:{size:10}}},tooltip:{backgroundColor:'#1A2033',borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:10}},scales:{y:{beginAtZero:true,grid:{color:'rgba(255,255,255,.03)'}},x:{grid:{display:false},ticks:{font:{family:"'Space Mono'",size:10}}}}}
+});
+</script>
+</body>
+</html>
